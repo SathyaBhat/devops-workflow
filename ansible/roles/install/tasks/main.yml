@@ -1,0 +1,43 @@
+---
+- name: update apt
+  become: yes
+  apt: 
+    update_cache: yes
+- name: Install list of packages
+  become: yes
+  apt: 
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  with_items:
+    - htop
+    - tmux 
+    - software-properties-common
+    - apt-transport-https
+    - ca-certificates
+    - curl
+
+- name: get docker key
+  become: yes
+  apt_key: 
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: install docker
+  become: yes
+  apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release | lower }} test
+      state: present
+
+- name: update apt for docker repo
+  become: yes
+  apt: 
+    update_cache: yes
+    name: docker-ce
+    state: present
+
+    
+
+
+
+    
