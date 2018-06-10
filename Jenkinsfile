@@ -29,7 +29,7 @@ ansiColor('css') {
        }
        stage('Launch Instance') {
            withAWS(credentials: 'sathyabhat', region:'ap-south-1') {
-               sh('cd terraform && terraform init && terraform plan && terraform apply')
+               sh('cd terraform && terraform init && terraform plan && terraform -auto-approve apply')
            }
        }
     }
