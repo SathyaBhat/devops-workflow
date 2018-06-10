@@ -3,6 +3,7 @@
   become: yes
   apt: 
     update_cache: yes
+
 - name: Install list of packages
   become: yes
   apt: 
@@ -23,7 +24,20 @@
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
 
-- name: install docker
+- name: get datadog key
+  become: yes
+  apt_key:
+      keyserver: hkp://keyserver.ubuntu.com:80
+      id: 382E94DE
+      state: present
+
+- name: add datadog repo
+  become: yes
+  apt_repository:
+    repo: deb https://apt.datadoghq.com/ stable 6
+    state: present
+
+- name: add docker repo
   become: yes
   apt_repository:
       repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release | lower }} test
@@ -33,11 +47,18 @@
   become: yes
   apt: 
     update_cache: yes
-    name: docker-ce
+    name: "{{item}}"
     state: present
+  with_items:
+    - docker-ce
+    - datadog-agent
 
-    
+- name: update datadog API key
+  become: yes
+  shell: "sed 's/api_key:.*/api_key: {{dd_token}}/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
 
-
-
-    
+- name: restart datadog
+  become: yes
+  service: 
+    name: datadog-agent
+    state: restarted

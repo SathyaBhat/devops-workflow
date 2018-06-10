@@ -1,4 +1,7 @@
 {
+    "variables": {
+          "DD_TOKEN": "{{env `DD_TOKEN`}}"
+    },
     "builders": [{
         "type": "amazon-ebs",
         "access_key": "{{user `aws_access_key`}}",
@@ -31,6 +34,7 @@
     {
         "type": "ansible-local",
         "playbook_file": "ansible/setup.yml",
-        "playbook_dir": "ansible"
+        "playbook_dir": "ansible",
+        "extra_arguments": [ "--extra-vars", "DD_TOKEN={{user `DD_TOKEN`}}"]
     }]
 }
