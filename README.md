@@ -13,7 +13,7 @@ Things that are included in the repo but not yet integrated in the cycle:
 - A Dockerfile for building a Docker image
 - Necessary integrations and plugins required for auto deploy on a github commit/push
 
-###Jenkins plugins
+### Jenkins plugins
 
 Following Jenkins plugins were used to achieve the desired result:
 
