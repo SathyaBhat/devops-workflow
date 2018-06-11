@@ -7,11 +7,13 @@ This repo aims to show a typical build -> test -> validate -> release cycle can 
 - Ansible, for config management and provisioning the necessary tools
 - Terraform for building the necessary resources and instances on AWS.
 - A Jenkinsfile which defines a Jenkins pipeline script for each of the different stages.
+- Datadog integration so that your instance reports metrics to datadog upon launch
 
 Things that are included in the repo but not yet integrated in the cycle:
 
 - A Dockerfile for building a Docker image
 - Necessary integrations and plugins required for auto deploy on a github commit/push
+- Setting up datadog account / datadog + AWS integration
 
 ### Jenkins plugins
 
