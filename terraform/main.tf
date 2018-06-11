@@ -19,6 +19,6 @@ resource "aws_instance" "app" {
   }
 }
 
-output "image_id" {
-  value = "${data.aws_ami.application_ami.id}"
+output "address" {
+  value = "${aws_instance.app.public_dns}"
 }
