@@ -18,7 +18,7 @@
         },
         "instance_type": "t2.micro",
         "ssh_username": "ubuntu",
-        "ami_name": "packer-demo-{{timestamp}}"
+        "ami_name": "greatlearning-{{timestamp}}"
       }],
   "provisioners": [
     {

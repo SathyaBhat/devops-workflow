@@ -127,3 +127,13 @@ resource "aws_route_table_association" "rta-ap-south-1b-public" {
 
 
 // Route table for private subnet association
+
+resource "aws_route_table_association" "rta-ap-south-1a-private" {
+    subnet_id = "${aws_subnet.ap-south-1a-private.id}"
+    route_table_id = "${aws_route_table.rt-ap-south-1a-private.id}" 
+}
+
+resource "aws_route_table_association" "rta-ap-south-1b-private" {
+    subnet_id = "${aws_subnet.ap-south-1b-private.id}"
+    route_table_id = "${aws_route_table.rt-ap-south-1a-private.id}"
+}
